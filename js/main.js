@@ -29,4 +29,26 @@ console.log('showResults("look", "up", (a, b) => `${a} ! ${b}`', showResults("lo
 function showResults(a, b, operation) {
     return operation(a, b);
 }
+const getId = (id) => id === null ? "Nothing!" : `your id - ${id}`;
+console.log('getId("str")', getId("str"));
+console.log("getId(22)", getId(22));
+console.log("getId(null)", getId(null));
+const userObj = { name: "Ari" };
+if ("age" in userObj) {
+    console.log('userObj["age"]', userObj["age"]);
+}
+else {
+    console.log('userObj["name"]', userObj["name"]);
+}
+const user_data = { name: "Tina", age: 33, role: "user" };
+const admin_data = { name: "Greg", role: "admin" };
+const unknown_data = { name: "Anonymous", age: 12000 };
+console.log("getUserData(user_data)", getUserData(user_data));
+console.log("getUserData(admin_data)", getUserData(admin_data));
+console.log("getUserData(unknown_data)", getUserData(unknown_data));
+function getUserData({ name, age = 100, role, }) {
+    return role !== undefined
+        ? `${name} ${age} - ${role}`
+        : `${name} ${age} - status 'unknown'`;
+}
 //# sourceMappingURL=main.js.map

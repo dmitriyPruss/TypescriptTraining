@@ -6,6 +6,7 @@
     "removeComments": true,
     "outDir": "js",
     "sourceMap": true,
+    "strictNullChecks": true,
     "outFile": "js/main.js"
   }
 }
