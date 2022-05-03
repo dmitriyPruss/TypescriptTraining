@@ -9,11 +9,11 @@ class User {
 }
 
 const tomas: User = new User("Tomas", 128);
-const user = this.document.getElementById("user");
-user!.innerHTML = `Hi, ${tomas.name}. Your age is ${tomas.age}`;
+const user = <HTMLElement>this.document.getElementById("user");
+user.innerHTML = `Hi, ${tomas.name}. Your age is ${tomas.age}`;
 
-const adminElement = this.document.getElementById("admin");
-adminElement!.innerHTML = `Hi, ${getAdmin("Vova", "Richmonder", true)}`;
+const adminElement = this.document.getElementById("admin") as HTMLElement;
+adminElement.innerHTML = `Hi, ${getAdmin("Vova", "Richmonder", true)}`;
 
 // Training 1
 function getAdmin(
@@ -110,3 +110,32 @@ function getUserData({
     ? `${name} ${age} - ${role}`
     : `${name} ${age} - status 'unknown'`;
 }
+
+//  Training 6
+type Person = { name: string; age: number };
+type Guest = Person & { isNew: boolean };
+
+const richard: Person = { name: "Richard", age: 45 };
+const ann: Guest = { name: "Ann", age: 33, isNew: true };
+
+const getDataPerson = (data: Person | Guest): string =>
+  `${data.name} ${data.age}`;
+
+console.log("getDataPerson(richard)", getDataPerson(richard));
+console.log("getDataPerson(ann)", getDataPerson(ann));
+
+const animals: string[] = ["mouse", "elephant", "cat"];
+
+for (const animal of animals) {
+  adminElement.append(` - ${animal} - `);
+}
+
+const nums: ReadonlyArray<number> = [1, 2, 3];
+
+for (const num of nums) {
+  console.log("num", num);
+}
+
+const [first, ...rest] = nums;
+console.log("first", first);
+console.log("rest", rest);

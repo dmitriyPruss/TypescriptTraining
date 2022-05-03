@@ -51,4 +51,20 @@ function getUserData({ name, age = 100, role, }) {
         ? `${name} ${age} - ${role}`
         : `${name} ${age} - status 'unknown'`;
 }
+const richard = { name: "Richard", age: 45 };
+const ann = { name: "Ann", age: 33, isNew: true };
+const getDataPerson = (data) => `${data.name} ${data.age}`;
+console.log("getDataPerson(richard)", getDataPerson(richard));
+console.log("getDataPerson(ann)", getDataPerson(ann));
+const animals = ["mouse", "elephant", "cat"];
+for (const animal of animals) {
+    adminElement.append(` - ${animal} - `);
+}
+const nums = [1, 2, 3];
+for (const num of nums) {
+    console.log("num", num);
+}
+const [first, ...rest] = nums;
+console.log("first", first);
+console.log("rest", rest);
 //# sourceMappingURL=main.js.map
