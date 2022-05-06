@@ -239,7 +239,6 @@ const dog = new Dog("Ben", 12, "grey");
 dog.getDogData();
 
 // Training 12
-
 type strNum = string | number;
 
 enum Days {
@@ -268,3 +267,90 @@ function getDayOfWeek(day: Days): strNum {
 
 console.log("getDayOfWeek(Days.saturday)", getDayOfWeek(Days.saturday));
 console.log("getDayOfWeek(Days.friday", getDayOfWeek(Days.friday));
+
+abstract class Auto {
+  abstract color: string;
+  abstract year: number;
+
+  abstract getData(): string;
+  go() {
+    console.log("-------------");
+    console.log("Automobile go");
+  }
+}
+
+class Volkswagen extends Auto {
+  color: string;
+  year: number;
+
+  model: string;
+  constructor(color: string, year: number, model: string) {
+    super();
+    this.model = model;
+  }
+
+  getData = (): string => `model - ${this.model}`;
+
+  go() {
+    super.go();
+    console.log("this.model", this.model);
+  }
+}
+
+const passat = new Volkswagen("green", 2011, "Passat");
+console.log("passat.getData()", passat.getData());
+passat.go();
+
+//  Training 13
+type yearType = number | null;
+
+class Building {
+  constructor(
+    private readonly name: string,
+    private year: number,
+    protected steps: number
+  ) {}
+
+  private setYear(year: number): yearType {
+    if (year > 0 && year <= 2022) {
+      return year;
+    }
+    return null;
+  }
+
+  protected getData = (): string => `${this.name} ${this.year}`;
+}
+
+const house = new Building("Castle", 1820, 5);
+
+class Skyfall extends Building {
+  constructor(name: string, year: number, steps: number) {
+    super(name, year, steps);
+  }
+
+  public getSkyfallData(): void {
+    console.log(`${this.getData()}. steps: ${this.steps}`);
+  }
+}
+
+const skyFall = new Skyfall("110", 1995, 100);
+skyFall.getSkyfallData();
+
+// Training 14
+class Fruit {
+  constructor(private _name: string) {}
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public set name(str: string) {
+    this._name = str === "" ? "Empty value!" : str;
+  }
+}
+
+const cherry = new Fruit("cherry");
+console.log("cherry.name - ", cherry.name);
+
+cherry.name = "";
+console.log("cherry.name - ", cherry.name);

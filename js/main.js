@@ -97,4 +97,64 @@ function getDayOfWeek(day) {
 }
 console.log("getDayOfWeek(Days.saturday)", getDayOfWeek(Days.saturday));
 console.log("getDayOfWeek(Days.friday", getDayOfWeek(Days.friday));
+class Auto {
+    go() {
+        console.log("-------------");
+        console.log("Automobile go");
+    }
+}
+class Volkswagen extends Auto {
+    constructor(color, year, model) {
+        super();
+        this.getData = () => `model - ${this.model}`;
+        this.model = model;
+    }
+    go() {
+        super.go();
+        console.log("this.model", this.model);
+    }
+}
+const passat = new Volkswagen("green", 2011, "Passat");
+console.log("passat.getData()", passat.getData());
+passat.go();
+class Building {
+    constructor(name, year, steps) {
+        this.name = name;
+        this.year = year;
+        this.steps = steps;
+        this.getData = () => `${this.name} ${this.year}`;
+    }
+    setYear(year) {
+        if (year > 0 && year <= 2022) {
+            return year;
+        }
+        return null;
+    }
+}
+const house = new Building("Castle", 1820, 5);
+class Skyfall extends Building {
+    constructor(name, year, steps) {
+        super(name, year, steps);
+    }
+    getSkyfallData() {
+        console.log(`${this.getData()}. steps: ${this.steps}`);
+    }
+}
+const skyFall = new Skyfall("110", 1995, 100);
+skyFall.getSkyfallData();
+class Fruit {
+    constructor(_name) {
+        this._name = _name;
+    }
+    get name() {
+        return this._name;
+    }
+    set name(str) {
+        this._name = str === "" ? "Empty value!" : str;
+    }
+}
+const cherry = new Fruit("cherry");
+console.log("cherry.name - ", cherry.name);
+cherry.name = "";
+console.log("cherry.name - ", cherry.name);
 //# sourceMappingURL=main.js.map
