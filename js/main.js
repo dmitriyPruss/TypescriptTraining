@@ -157,4 +157,75 @@ const cherry = new Fruit("cherry");
 console.log("cherry.name - ", cherry.name);
 cherry.name = "";
 console.log("cherry.name - ", cherry.name);
+class Plant {
+    get height() {
+        return Plant._height;
+    }
+    set height(val) {
+        Plant._height = val > 0 ? val : 0;
+    }
+    static getHeight(name) {
+        console.log("`${name} - ${Plant.height} m`", `${name} - ${Plant._height} m`);
+    }
+}
+class Tree extends Plant {
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+    getTreeData() {
+        Plant.getHeight(this.name);
+    }
+}
+const apple = new Tree("apple");
+apple.height = -2;
+console.log("apple.height", apple.height);
+apple.height = 7;
+apple.getTreeData();
+const adidas = {
+    name: "adidas",
+    size: 42,
+    color: "red",
+    getParams() {
+        if (this.color) {
+            return `${this.name} ${this.size} ${this.color}`;
+        }
+        return `${this.name} ${this.size}`;
+    },
+};
+console.log("adidas.getParams()", adidas.getParams());
+class Labutens {
+    constructor(name, size) {
+        this.name = name;
+        this.size = size;
+    }
+    getParams() {
+        return `${this.name} ${this.size}`;
+    }
+}
+const lapti = new Labutens("labutens", 33);
+console.log("lapti.getParams()", lapti.getParams());
+const getPersonData = function (name, surname, country) {
+    return `${name} ${surname} ${country}`;
+};
+const kventin = getPersonData("Kwentin", "Tarantino", "USA");
+console.log("kventin", kventin);
+let phoneBook = {
+    Fred: 380605050332,
+    Nika: 750907009080,
+};
+console.log('phoneBook["Nika"]', phoneBook["Nika"]);
+function getNewUser() {
+    const newUser = function (login, email) {
+        newUser.data = login + " - " + email;
+    };
+    newUser.auth = () => {
+        console.log("`${newUser.data} ${newUser.password}`", `${newUser.data} ${newUser.password}`);
+    };
+    return newUser;
+}
+const gennadiy = getNewUser();
+gennadiy("gennadiy", "gena78@gmail.com");
+gennadiy.password = "gena_bez_keygena)))";
+gennadiy.auth();
 //# sourceMappingURL=main.js.map

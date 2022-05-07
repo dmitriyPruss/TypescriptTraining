@@ -354,3 +354,130 @@ console.log("cherry.name - ", cherry.name);
 
 cherry.name = "";
 console.log("cherry.name - ", cherry.name);
+
+// Training 15
+class Plant {
+  private static _height: number;
+
+  public get height() {
+    return Plant._height;
+  }
+
+  public set height(val: number) {
+    Plant._height = val > 0 ? val : 0;
+  }
+
+  protected static getHeight(name: string): void {
+    console.log(
+      "`${name} - ${Plant.height} m`",
+      `${name} - ${Plant._height} m`
+    );
+  }
+}
+
+class Tree extends Plant {
+  constructor(private name: string) {
+    super();
+  }
+
+  getTreeData(): void {
+    Plant.getHeight(this.name);
+  }
+}
+
+const apple = new Tree("apple");
+apple.height = -2;
+console.log("apple.height", apple.height);
+apple.height = 7;
+apple.getTreeData();
+
+// Trainig 16 - Interfaces
+interface Shoes {
+  readonly name: string;
+  size: number;
+}
+
+interface Shoes {
+  color?: string;
+}
+
+interface Boots extends Shoes {
+  getParams(): string;
+}
+
+const adidas: Boots = {
+  name: "adidas",
+  size: 42,
+  color: "red",
+  getParams(): string {
+    if (this.color) {
+      return `${this.name} ${this.size} ${this.color}`;
+    }
+    return `${this.name} ${this.size}`;
+  },
+};
+
+console.log("adidas.getParams()", adidas.getParams());
+
+class Labutens implements Boots {
+  constructor(public name: string, public size: number) {}
+  getParams(): string {
+    return `${this.name} ${this.size}`;
+  }
+}
+
+const lapti = new Labutens("labutens", 33);
+console.log("lapti.getParams()", lapti.getParams());
+
+type userDataType = string | null;
+interface UserData {
+  (name: string, surname: string, country: string): userDataType;
+}
+
+const getPersonData: UserData = function (
+  name: string,
+  surname: string,
+  country: string
+): userDataType {
+  return `${name} ${surname} ${country}`;
+};
+
+const kventin = getPersonData("Kwentin", "Tarantino", "USA");
+console.log("kventin", kventin);
+
+interface PhoneBook {
+  [index: string]: number;
+}
+
+let phoneBook: PhoneBook = {
+  Fred: 380605050332,
+  Nika: 750907009080,
+};
+
+console.log('phoneBook["Nika"]', phoneBook["Nika"]);
+
+interface Guest {
+  (login: string, email: string): void;
+  data: string;
+  password: string;
+  auth(): void;
+}
+
+function getNewUser(): Guest {
+  const newUser = <Guest>function (login: string, email: string): void {
+    newUser.data = login + " - " + email;
+  };
+  newUser.auth = () => {
+    console.log(
+      "`${newUser.data} ${newUser.password}`",
+      `${newUser.data} ${newUser.password}`
+    );
+  };
+
+  return newUser;
+}
+
+const gennadiy = getNewUser();
+gennadiy("gennadiy", "gena78@gmail.com");
+gennadiy.password = "gena_bez_keygena)))";
+gennadiy.auth();
