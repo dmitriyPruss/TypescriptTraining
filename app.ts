@@ -481,3 +481,129 @@ const gennadiy = getNewUser();
 gennadiy("gennadiy", "gena78@gmail.com");
 gennadiy.password = "gena_bez_keygena)))";
 gennadiy.auth();
+
+// Training 17
+interface Instrument {
+  name: string;
+}
+
+class MusicInstrument {
+  constructor(public name: string) {}
+}
+
+class Violin extends MusicInstrument {
+  constructor(public name: string, public year: number) {
+    super(name);
+  }
+}
+
+function getMusicInstrumentName(data: Instrument): void {
+  console.log("`${data.name}`", `${data.name}`);
+}
+
+const violin: MusicInstrument = new Violin("classic", 1820);
+console.log("violin.year", (<Violin>violin).year);
+
+const guitar: MusicInstrument = new Violin("Kramer", 1990);
+console.log("guitar.year", (guitar as Violin).year);
+
+const piano = new MusicInstrument("piano");
+if (piano instanceof Violin) {
+  console.log("It is a violin!");
+} else {
+  console.log("It`s a piano!");
+}
+
+getMusicInstrumentName(violin);
+getMusicInstrumentName({ name: "Piano", age: 100 } as Instrument);
+
+function getCard<T>(data: Array<T>): string {
+  return data.join(" - ");
+}
+
+console.log("getCard<boolean>([false, true])", getCard<boolean>([false, true]));
+console.log("getCard<number>([1, 2,3])", getCard<number>([1, 2, 3]));
+
+interface Operation<T> {
+  getData(): T;
+}
+
+class Sum<T> implements Operation<T> {
+  constructor(private type: T) {}
+  getData(): T {
+    return this.type;
+  }
+}
+
+const sum = new Sum("+");
+console.log("sum.getData()", sum.getData());
+
+interface NumberData {
+  value: number;
+}
+
+function isEqualValue<T extends NumberData>(val1: T, val2: T): string {
+  return val1.value === val2.value ? "Equal!" : "Not equal!";
+}
+
+const three: NumberData = { value: 3 };
+const four: NumberData = { value: 4 };
+console.log(
+  "isEqualValue<NumberData>(three, four)",
+  isEqualValue<NumberData>(three, four)
+);
+
+interface ICheck {
+  isChecked: boolean;
+}
+
+class Check {
+  constructor(public value: number, public isChecked: boolean) {}
+}
+
+const check1 = new Check(100, true);
+const check2 = new Check(100, false);
+console.log(
+  "isEqualValue<Check>(check1, check2)",
+  isEqualValue<Check>(check1, check2)
+);
+
+class SecretData<T extends ICheck> {
+  getData(obj: T) {
+    console.log(`is Checked? ${obj.isChecked}`);
+  }
+}
+
+const checked1 = new SecretData<Check>();
+checked1.getData(check2);
+
+class Beast {
+  eat(): void {
+    console.log("It eats");
+  }
+}
+
+class Movable {
+  static speed: number = 3;
+  move() {
+    console.log("`${this.speed}`", `${Movable.speed}`);
+  }
+}
+
+class Frog {}
+
+interface Frog extends Beast, Movable {}
+
+function mixClasses(currentClass: any, anotherClasses: any[]) {
+  anotherClasses.forEach((anotherClass) => {
+    Object.getOwnPropertyNames(anotherClass.prototype).forEach((name) => {
+      currentClass.prototype[name] = anotherClass.prototype[name];
+    });
+  });
+}
+
+mixClasses(Frog, [Beast, Movable]);
+
+const frog: Frog = new Frog();
+frog.eat();
+frog.move();

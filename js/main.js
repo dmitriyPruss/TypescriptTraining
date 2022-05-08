@@ -228,4 +228,93 @@ const gennadiy = getNewUser();
 gennadiy("gennadiy", "gena78@gmail.com");
 gennadiy.password = "gena_bez_keygena)))";
 gennadiy.auth();
+class MusicInstrument {
+    constructor(name) {
+        this.name = name;
+    }
+}
+class Violin extends MusicInstrument {
+    constructor(name, year) {
+        super(name);
+        this.name = name;
+        this.year = year;
+    }
+}
+function getMusicInstrumentName(data) {
+    console.log("`${data.name}`", `${data.name}`);
+}
+const violin = new Violin("classic", 1820);
+console.log("violin.year", violin.year);
+const guitar = new Violin("Kramer", 1990);
+console.log("guitar.year", guitar.year);
+const piano = new MusicInstrument("piano");
+if (piano instanceof Violin) {
+    console.log("It is a violin!");
+}
+else {
+    console.log("It`s a piano!");
+}
+getMusicInstrumentName(violin);
+getMusicInstrumentName({ name: "Piano", age: 100 });
+function getCard(data) {
+    return data.join(" - ");
+}
+console.log("getCard<boolean>([false, true])", getCard([false, true]));
+console.log("getCard<number>([1, 2,3])", getCard([1, 2, 3]));
+class Sum {
+    constructor(type) {
+        this.type = type;
+    }
+    getData() {
+        return this.type;
+    }
+}
+const sum = new Sum("+");
+console.log("sum.getData()", sum.getData());
+function isEqualValue(val1, val2) {
+    return val1.value === val2.value ? "Equal!" : "Not equal!";
+}
+const three = { value: 3 };
+const four = { value: 4 };
+console.log("isEqualValue<NumberData>(three, four)", isEqualValue(three, four));
+class Check {
+    constructor(value, isChecked) {
+        this.value = value;
+        this.isChecked = isChecked;
+    }
+}
+const check1 = new Check(100, true);
+const check2 = new Check(100, false);
+console.log("isEqualValue<Check>(check1, check2)", isEqualValue(check1, check2));
+class SecretData {
+    getData(obj) {
+        console.log(`is Checked? ${obj.isChecked}`);
+    }
+}
+const checked1 = new SecretData();
+checked1.getData(check2);
+class Beast {
+    eat() {
+        console.log("It eats");
+    }
+}
+class Movable {
+    move() {
+        console.log("`${this.speed}`", `${Movable.speed}`);
+    }
+}
+Movable.speed = 3;
+class Frog {
+}
+function mixClasses(currentClass, anotherClasses) {
+    anotherClasses.forEach((anotherClass) => {
+        Object.getOwnPropertyNames(anotherClass.prototype).forEach((name) => {
+            currentClass.prototype[name] = anotherClass.prototype[name];
+        });
+    });
+}
+mixClasses(Frog, [Beast, Movable]);
+const frog = new Frog();
+frog.eat();
+frog.move();
 //# sourceMappingURL=main.js.map
